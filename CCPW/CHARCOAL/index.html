@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCPW Charcoal — Sklep z profesjonalnym węglem drzewnym</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Nagłówek i Koszyk -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">CCPW <span>CHARCOAL</span></a>
+            <div class="header-actions">
+                <button class="cart-btn" id="openCart">
+                    🛒 Koszyk <span id="cartCount" class="cart-badge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sekcja Powitalna (Hero) -->
+    <section class="hero">
+        <div class="container hero-content">
+            <span class="subtitle">Najwyższa kaloryczność • Czysty żar</span>
+            <h1>Profesjonalny Węgiel Drzewny dla Gastronomii i Domu</h1>
+            <p>Wybierz sprawdzone źródło energii od CCPW. Ekologiczny węgiel i brykiety o długim czasie spalania do grilla, kominków oraz profesjonalnej gastronomii.</p>
+            <a href="#products" class="btn btn-primary">Zobacz produkty</a>
+        </div>
+    </section>
+
+    <!-- Sekcja Produktów -->
+    <section id="products" class="section products-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nasza Oferta Charcoal</h2>
+                <p>Wszystkie produkty posiadają certyfikaty jakości i pochodzą w 100% z legalnych źródeł.</p>
+            </div>
+            
+            <div class="products-grid" id="productsGrid">
+                <!-- Generowane dynamicznie przez JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel Koszyka (Drawer) -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Twój Koszyk</h3>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart-msg">Koszyk jest pusty.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Razem:</span>
+                <strong id="cartTotal">0.00 zł</strong>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkoutBtn">Przejdź do kasy</button>
+        </div>
+    </div>
+
+    <!-- Modal / Ekran Finalizacji Zamówienia (Checkout) -->
+    <div class="checkout-modal-overlay" id="checkoutOverlay"></div>
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-modal-header">
+            <h3>Finalizacja Zamówienia</h3>
+            <button class="close-checkout" id="closeCheckout">&times;</button>
+        </div>
+        <div class="checkout-modal-body">
+            <form id="checkoutForm">
+                <div class="form-section-title">1. Dane do wysyłki</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Imię</label>
+                        <input type="text" id="firstName" required placeholder="Jan">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Nazwisko</label>
+                        <input type="text" id="lastName" required placeholder="Kowalski">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Adres E-mail</label>
+                    <input type="email" id="email" required placeholder="jan@kowalski.pl">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefon kontaktowy</label>
+                    <input type="tel" id="phone" required placeholder="+48 600 000 000">
+                </div>
+                <div class="form-group">
+                    <label for="address">Adres (ulica i numer)</label>
+                    <input type="text" id="address" required placeholder="Przemysłowa 12/4">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="zipCode">Kod pocztowy</label>
+                        <input type="text" id="zipCode" required placeholder="00-001">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Miejscowość</label>
+                        <input type="text" id="city" required placeholder="Warszawa">
+                    </div>
+                </div>
+
+                <div class="form-section-title">2. Metoda płatności</div>
+                <div class="payment-options">
+                    <label class="payment-card">
+                        <input type="radio" name="payment" value="blik" checked>
+                        <span>BLIK / Szybki przelew</span>
+                    </label>
+                    <label class="payment-card">
+                        <input type="radio" name="payment" value="card">
+                        <span>Karta płatnicza</span>
+                    </label>
+                    <label class="payment-card">
+                        <input type="radio" name="payment" value="cod">
+                        <span>Płatność przy odbiorze</span>
+                    </label>
+                </div>
+
+                <div class="checkout-summary-box">
+                    <div class="summary-row">
+                        <span>Wartość produktów:</span>
+                        <strong id="summaryProductsPrice">0.00 zł</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Dostawa kurierska:</span>
+                        <strong>19.99 zł</strong>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Do zapłaty:</span>
+                        <strong id="summaryTotalPrice">19.99 zł</strong>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Potwierdź i opłać zamówienie</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Stopka -->
+    <footer class="footer">
+        <div class="container footer-flex">
+            <p>&copy; 2026 CCPW Charcoal. Wszelkie prawa zastrzeżone.</p>
+            <div class="footer-links">
+                <a href="#">Dostawa i Płatności</a>
+                <a href="#">Regulamin</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Skrypt sklepu -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCPW Coal — Skład Opału i Węgla Mineralnego</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Nagłówek i Koszyk -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">CCPW <span>COAL</span></a>
+            <div class="header-actions">
+                <button class="cart-btn" id="openCart">
+                    🛒 Koszyk <span id="cartCount" class="cart-badge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sekcja Powitalna (Hero) -->
+    <section class="hero">
+        <div class="container hero-content">
+            <span class="subtitle">Wysoka kaloryczność • Niska zawartość popiołu</span>
+            <h1>Sprawdzony Węgiel Opałowy dla Domu i Przemysłu</h1>
+            <p>Zapewnij ciepło w swoim budynku dzięki certyfikowanemu węglowi mineralnemu od CCPW. Oferujemy ekogroszek, orzech i miał w konkurencyjnych cenach z dostawą pod wskazany adres.</p>
+            <a href="#products" class="btn btn-primary">Sprawdź ceny węgla</a>
+        </div>
+    </section>
+
+    <!-- Sekcja Produktów -->
+    <section id="products" class="section products-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Asortyment Opałowy</h2>
+                <p>Wszystkie paliwa spełniają rygorystyczne normy jakościowe i posiadają certyfikaty kaloryczności.</p>
+            </div>
+            
+            <div class="products-grid" id="productsGrid">
+                <!-- Generowane dynamicznie przez JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel Koszyka (Drawer) -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Koszyk Opału</h3>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart-msg">Koszyk jest pusty.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Razem:</span>
+                <strong id="cartTotal">0.00 zł</strong>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkoutBtn">Przejdź do zamówienia</button>
+        </div>
+    </div>
+
+    <!-- Modal / Ekran Finalizacji Zamówienia (Checkout) -->
+    <div class="checkout-modal-overlay" id="checkoutOverlay"></div>
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-modal-header">
+            <h3>Szczegóły Zamówienia i Dostawy</h3>
+            <button class="close-checkout" id="closeCheckout">&times;</button>
+        </div>
+        <div class="checkout-modal-body">
+            <form id="checkoutForm">
+                <div class="form-section-title">1. Dane odbiorcy</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Imię / Nazwa firmy</label>
+                        <input type="text" id="firstName" required placeholder="Jan / Firma Sp. z o.o.">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Nazwisko</label>
+                        <input type="text" id="lastName" required placeholder="Kowalski">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Adres E-mail</label>
+                    <input type="email" id="email" required placeholder="jan@opall.pl">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefon kontaktowy (dla kierowcy)</label>
+                    <input type="tel" id="phone" required placeholder="+48 600 000 000">
+                </div>
+                <div class="form-group">
+                    <label for="address">Adres dostawy (ulica, numer budynku)</label>
+                    <input type="text" id="address" required placeholder="Górnicza 45">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="zipCode">Kod pocztowy</label>
+                        <input type="text" id="zipCode" required placeholder="00-001">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Miejscowość</label>
+                        <input type="text" id="city" required placeholder="Katowice">
+                    </div>
+                </div>
+
+                <div class="form-section-title">2. Sposób dostawy</div>
+                <div class="payment-options">
+                    <label class="payment-card">
+                        <input type="radio" name="shipping" value="autodump" checked>
+                        <span>Transport samolotem / Samochodem z windą (Paleta + Winda)</span>
+                    </label>
+                    <label class="payment-card">
+                        <input type="radio" name="shipping" value="selfpickup">
+                        <span>Odbiór własny ze składu (0 zł)</span>
+                    </label>
+                </div>
+
+                <div class="form-section-title">3. Płatność</div>
+                <div class="payment-options">
+                    <label class="payment-card">
+                        <input type="radio" name="payment" value="transfer" checked>
+                        <span>Przelew tradycyjny / Szybki przelew Online</span>
+                    </label>
+                    <label class="payment-card">
+                        <input type="radio" name="payment" value="cod">
+                        <span>Płatność gotówką przy odbiorze u kierowcy</span>
+                    </label>
+                </div>
+
+                <div class="checkout-summary-box">
+                    <div class="summary-row">
+                        <span>Wartość węgla:</span>
+                        <strong id="summaryProductsPrice">0.00 zł</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Dostawa logistyczna:</span>
+                        <strong>150.00 zł</strong>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Do zapłaty:</span>
+                        <strong id="summaryTotalPrice">150.00 zł</strong>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Potwierdź zamówienie węgla</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Stopka -->
+    <footer class="footer">
+        <div class="container footer-flex">
+            <p>&copy; 2026 CCPW Coal. Wszelkie prawa zastrzeżone.</p>
+            <div class="footer-links">
+                <a href="#">Certyfikaty jakości</a>
+                <a href="#">Regulamin składu</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Skrypt sklepu -->
+    <script src="script.js"></script>
+</body>
+</html>

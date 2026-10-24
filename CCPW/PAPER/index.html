@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCPW Paper — Ekologiczny Papier i Opakowania Celulozowe</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Nagłówek i Koszyk -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">CCPW <span>PAPER</span></a>
+            <div class="header-actions">
+                <button class="cart-btn" id="openCart">
+                    🛒 Koszyk <span id="cartCount" class="cart-badge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sekcja Powitalna (Hero) -->
+    <section class="hero">
+        <div class="container hero-content">
+            <span class="subtitle">100% Recykling • Certyfikat FSC</span>
+            <h1>Zrównoważone Rozwiązania Papiernicze dla Biznesu i Domu</h1>
+            <p>Odkryj ekologiczny papier biurowy, wytrzymałe tektury oraz biodegradowalne opakowania celulozowe od CCPW. Dbamy o lasy, dostarczając najwyższą jakość druku i pakowania.</p>
+            <a href="#products" class="btn btn-primary">Przeglądaj produkty papierowe</a>
+        </div>
+    </section>
+
+    <!-- Sekcja Produktów -->
+    <section id="products" class="section products-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Oferta Papieru i Opakowań</h2>
+                <p>Produkty wytwarzane w oparciu o gospodarkę obiegu zamkniętego.</p>
+            </div>
+            
+            <div class="products-grid" id="productsGrid">
+                <!-- Generowane dynamicznie przez JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel Koszyka (Drawer) -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Koszyk Papieru</h3>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart-msg">Koszyk jest pusty.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Razem:</span>
+                <strong id="cartTotal">0.00 zł</strong>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkoutBtn">Przejdź do zamówienia</button>
+        </div>
+    </div>
+
+    <!-- Modal Finalizacji Zamówienia (Checkout) -->
+    <div class="checkout-modal-overlay" id="checkoutOverlay"></div>
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-modal-header">
+            <h3>Finalizacja Zamówienia</h3>
+            <button class="close-checkout" id="closeCheckout">&times;</button>
+        </div>
+        <div class="checkout-modal-body">
+            <form id="checkoutForm">
+                <div class="form-section-title">1. Dane do faktury i wysyłki</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Imię / Nazwa firmy</label>
+                        <input type="text" id="firstName" required placeholder="Anna / Drukarnia S.A.">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Nazwisko</label>
+                        <input type="text" id="lastName" required placeholder="Nowak">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Adres E-mail</label>
+                    <input type="email" id="email" required placeholder="biuro@firma.pl">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefon kontaktowy</label>
+                    <input type="tel" id="phone" required placeholder="+48 500 600 700">
+                </div>
+                <div class="form-group">
+                    <label for="address">Adres dostawy</label>
+                    <input type="text" id="address" required placeholder="Zielona 10">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="zipCode">Kod pocztowy</label>
+                        <input type="text" id="zipCode" required placeholder="30-002">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Miejscowość</label>
+                        <input type="text" id="city" required placeholder="Kraków">
+                    </div>
+                </div>
+
+                <div class="form-section-title">2. Sposób płatności</div>
+                <div class="payment-options">
+                    <label class="payment-card">
+                        <input type="radio" name="payment" value="online" checked>
+                        <span>Szybki przelew online / BLIK</span>
+                    </label>
+                    <label class="payment-card">
+                        <input type="radio" name="payment" value="invoice">
+                        <span>Faktura z odroczonym terminem (dla stałych firm)</span>
+                    </label>
+                </div>
+
+                <div class="checkout-summary-box">
+                    <div class="summary-row">
+                        <span>Wartość materiałów:</span>
+                        <strong id="summaryProductsPrice">0.00 zł</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Przesyłka kurierska paletowa/paczka:</span>
+                        <strong>24.99 zł</strong>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Do zapłaty:</span>
+                        <strong id="summaryTotalPrice">24.99 zł</strong>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Potwierdź i opłać zamówienie</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Stopka -->
+    <footer class="footer">
+        <div class="container footer-flex">
+            <p>&copy; 2026 CCPW Paper. Wszelkie prawa zastrzeżone.</p>
+            <div class="footer-links">
+                <a href="#">Certyfikaty FSC</a>
+                <a href="#">Polityka środowiskowa</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Skrypt -->
+    <script src="script.js"></script>
+</body>
+</html>
